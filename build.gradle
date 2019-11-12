@@ -1,6 +1,7 @@
 // tested with gradle 4.10.3
 plugins {
     id 'java'
+    id 'war'
 }
 
 repositories {
@@ -8,6 +9,13 @@ repositories {
 }
 
 dependencies {
+    compileOnly "com.vaadin:vaadin-client:${vaadinVersion}"
     compile "com.vaadin:vaadin-server:${vaadinVersion}"
-    compile "com.vaadin:vaadin-client:${vaadinVersion}"
+    compile "com.vaadin:vaadin-themes:${vaadinVersion}"
+    compile "com.vaadin:vaadin-client-compiled:${vaadinVersion}"
+}
+
+war {
+    baseName = 'vaadin-widget'
+    version =  '0.1'
 }
