@@ -1,7 +1,19 @@
 // tested with gradle 4.10.3
+
+// not required by VAADIN. Used only to have the deployment on "/" context root AND embed a tomcat server
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.bmuschko:gradle-tomcat-plugin:2.5'
+    }
+}
+
 plugins {
     id 'java'
     id 'war'
+    id "com.bmuschko.tomcat" version "2.5"
 }
 
 repositories {
@@ -13,9 +25,17 @@ dependencies {
     compile "com.vaadin:vaadin-server:${vaadinVersion}"
     compile "com.vaadin:vaadin-themes:${vaadinVersion}"
     compile "com.vaadin:vaadin-client-compiled:${vaadinVersion}"
+
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}"
+    tomcat "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
 }
 
 war {
     baseName = 'vaadin-widget'
     version =  '0.1'
 }
+
+tomcatRun.contextPath = '/'
+tomcatRunWar.contextPath = '/'
+
+defaultTasks 'tomcatRunWar'
