@@ -1,0 +1,11 @@
+// tested with gradle 4.10.3
+plugins {
+    id 'java'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+}
